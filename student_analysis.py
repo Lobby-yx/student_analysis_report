@@ -23,4 +23,25 @@ if uploaded_file:
     df = pd.read_csv("uploaded_file")
 st.dataframe(df)
 
-st.bar_chart(df["age"].value_counts())
+
+st.bar_chart(df["gender"].value_counts())
+
+st.line_chart(df["score"])
+import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots()
+ax.hist(df["score"])
+st.pyplot(fig)
+st.sidebar.title("Navigation")
+option = st.sidebar.selectbox(
+    "Choose View",
+    ["Dataset", "Summary", "Visualizations"]
+)
+if option == "Dataset":
+    st.dataframe(df)
+
+elif option == "Summary":
+    st.write(df.describe())
+
+elif option == "Visualizations":
+    st.bar_chart(df["gender"].value_counts())
